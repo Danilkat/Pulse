@@ -123,20 +123,21 @@
                 transform: translateX(-100%)
                 margin-left: 0px
             li
-                position: relative
-                margin-bottom: 20px
-                font-size: 14px
-                line-height: 1.2
-                font-weight: 300
-                color: #555555
-                &::before
-                    content: ''
-                    position: absolute
-                    width: 5px
-                    height: 5px
-                    background-color: $main-color
-                    left: -14px
-                    top: 7px
+                &:not(.catalog__link-list-item) 
+                    position: relative
+                    margin-bottom: 20px
+                    font-size: 14px
+                    line-height: 1.2
+                    font-weight: 300
+                    color: #555555
+                    &::before
+                        content: ''
+                        position: absolute
+                        width: 5px
+                        height: 5px
+                        background-color: $main-color
+                        left: -14px
+                        top: 7px
         &__back
             position: absolute
             bottom: 0
