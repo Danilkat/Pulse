@@ -5,6 +5,7 @@
         width: 750px
         margin: 0 auto
         img
+            margin: 0 auto
 
     .slick-prev, .slick-next
         position: absolute
@@ -19,3 +20,33 @@
     .slick-next
         right: -66px
         left: auto
+    &__tabs
+        width: 100% 
+        display: flex
+        justify-content: center
+    .slick-dots
+        padding: 0
+        list-style-type: none
+        display: flex
+        li
+            margin: 0 5vw
+            button
+                font-size: 0.9em
+                line-height: 0
+                width: 15vw
+                height: 25px
+                border-radius: 12px
+                background-color: #ffffff
+                border: 2px solid #d0d0d0
+                transition: 0.2s all
+                color: #6b6b6b
+                &:hover
+                    box-shadow: 3px 3px 20px $main-color
+                    border: none
+                &:focus
+                    outline: none
+    .slick-active
+        button
+            background-color: $main-color !important
+            color: #ffffff !important
+            border: none !important

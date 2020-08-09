@@ -2,25 +2,35 @@ $(document).ready(function(){
     $('.carousel__inner').slick({
         prevArrow: '<button type="button" class="slick-prev"><img src="icons/leftArrow.png"></button>',
         nextArrow: '<button type="button" class="slick-next"><img src="icons/rightArrow.png"></button>',
+        appendDots: '.carousel__tabs',
         responsive: [
-            {
-              breakpoint: 768,
-              settings: {
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                infinite: true,
-                dots: true
-              }
+          {
+            breakpoint: 950,
+            settings: {
+              slidesToShow: 1,
+              slidesToScroll: 1,
+              arrows: false,
+              infinite: true,
+              dots: true
             }
+          }
         ]
     });
 
     $('ul.catalog__tabs').on('click', 'li:not(.catalog__tab_active)', function() {
-      $(this)
+      const tab = $(this);
+      $('.catalog__wrapper').fadeOut('slow', () => executeTabChange(tab, () => {
+        $('.catalog__wrapper').fadeIn('slow')
+      }))
+    });
+
+    function executeTabChange(form, callback) {
+      form
         .addClass('catalog__tab_active').siblings().removeClass('catalog__tab_active')
         .closest('div.container').find('div.catalog__content').removeClass('catalog__content_active')
-        .eq($(this).index()).addClass('catalog__content_active');
-    });
+        .eq(form.index()).addClass('catalog__content_active');
+        callback();
+    }
 
 
     function toggleSlide(item) {
@@ -38,15 +48,24 @@ $(document).ready(function(){
 
     //modal
 
+    
+    function closeModal() {
+      $('.overlay, #consultation, #thanks, #order').fadeOut();
+    }
+
+    $(document).keyup((e) =>
+      (e.key === "Escape") ? closeModal() : '');
+
+
     $('[data-modal=consultation]').on('click', function() {
       $('.overlay, #consultation').fadeIn();
     })
-    $('.modal__close').on('click', function() {
-      $('.overlay, #consultation, #thanks, #order').fadeOut();
-    })
-    $('.button_mini').on('click', function() {
-      $('.overlay, #order').fadeIn();
-    })
+    $('.modal__close, .overlay').on('click', closeModal);
+
+    
+
+
+
 
     $('.button_mini').each(function(i) {
       $(this).on('click', function() {
@@ -117,7 +136,9 @@ $(document).ready(function(){
       }
     })
 
-    $("a[href^='#']").click(function(){
+
+
+    $("a[href='#up'], a[href='#catalog']").click(function(){
       const _href = $(this).attr("href");
       $("html, body").animate({scrollTop: $(_href).offset().top+"px"});
       return false;
